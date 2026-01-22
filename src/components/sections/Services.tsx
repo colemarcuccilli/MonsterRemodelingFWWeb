@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { getAssetPath } from '@/lib/utils'
 import {
   ChefHat,
   Bath,
@@ -143,7 +144,7 @@ export default function Services() {
       {/* Low opacity background photo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <Image
-          src="/assets/work5.webp"
+          src={getAssetPath('/assets/work5.webp')}
           alt=""
           fill
           className="object-cover opacity-[0.06]"

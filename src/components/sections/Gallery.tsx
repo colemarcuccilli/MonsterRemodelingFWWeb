@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { getAssetPath } from '@/lib/utils'
 import { ChevronRight } from 'lucide-react'
 
 const galleryImages = [
@@ -12,7 +13,7 @@ const galleryImages = [
   { src: '/assets/work4.webp', alt: 'Interior remodeling project' },
   { src: '/assets/work5.webp', alt: 'Exterior facelift project' },
   { src: '/assets/work6.webp', alt: 'Complete renovation project' },
-]
+].map(img => ({ ...img, src: getAssetPath(img.src) }))
 
 export default function Gallery() {
   const sectionRef = useRef<HTMLElement>(null)

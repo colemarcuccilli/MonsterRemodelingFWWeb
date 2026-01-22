@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { getAssetPath } from '@/lib/utils'
 import { MessageSquare, Hammer, CheckCircle, ArrowRight } from 'lucide-react'
 
 const phases = [
@@ -287,7 +288,7 @@ export default function Process() {
                         {/* Image container */}
                         <div className="relative h-full rounded-2xl overflow-hidden border-2 border-monster-purple/20 shadow-xl shadow-monster-purple/10 group">
                           <Image
-                            src={phase.image}
+                            src={getAssetPath(phase.image)}
                             alt={`${phase.title} - Monster Remodeling`}
                             fill
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -310,7 +311,7 @@ export default function Process() {
                   <div className="lg:hidden mt-8">
                     <div className="relative aspect-[4/3] max-w-sm mx-auto rounded-xl overflow-hidden border border-monster-purple/20 shadow-lg">
                       <Image
-                        src={phase.image}
+                        src={getAssetPath(phase.image)}
                         alt={`${phase.title} - Monster Remodeling`}
                         fill
                         className="object-cover"

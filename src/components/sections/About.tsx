@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { getAssetPath } from '@/lib/utils'
 import { Heart, Award, Users, Sparkles } from 'lucide-react'
 
 const stats = [
@@ -106,7 +107,7 @@ export default function About() {
         <div ref={imageRef} className="relative mb-16">
           <div className="relative aspect-[16/9] sm:aspect-[2/1] rounded-2xl overflow-hidden border border-monster-purple/20 shadow-xl shadow-monster-purple/10">
             <Image
-              src="/assets/FamilyPhotoWide.webp"
+              src={getAssetPath('/assets/FamilyPhotoWide.webp')}
               alt="Lee and family - Monster Remodeling"
               fill
               className="object-cover"

@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { getAssetPath } from '@/lib/utils'
 import { Phone, Mail, MapPin, Facebook, Instagram } from 'lucide-react'
 
 export default function Footer() {
@@ -39,7 +40,7 @@ export default function Footer() {
           <div className="footer-animate">
             <Link href="#home" className="flex items-center gap-3 mb-6">
               <Image
-                src="/assets/MonsterRemodelingLogo.webp"
+                src={getAssetPath('/assets/MonsterRemodelingLogo.webp')}
                 alt="Monster Remodeling"
                 width={48}
                 height={48}

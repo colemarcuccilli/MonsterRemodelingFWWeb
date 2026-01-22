@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { gsap } from '@/lib/gsap'
+import { getAssetPath } from '@/lib/utils'
 import { ArrowDown, Hammer, Paintbrush, Home, Wrench, Ruler, HardHat, PaintBucket, Drill } from 'lucide-react'
 
 export default function Hero() {
@@ -179,7 +180,7 @@ export default function Hero() {
       {/* Very low opacity background photo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <Image
-          src="/assets/work4.webp"
+          src={getAssetPath('/assets/work4.webp')}
           alt=""
           fill
           className="object-cover opacity-[0.18]"
@@ -335,7 +336,7 @@ export default function Hero() {
       <div className="absolute bottom-0 left-1/2 md:left-[15%] transform -translate-x-1/2 md:translate-x-0 translate-y-1/2 z-[60] pointer-events-none">
         <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
           <Image
-            src="/assets/MonsterRemodelingLogo.webp"
+            src={getAssetPath('/assets/MonsterRemodelingLogo.webp')}
             alt="Monster Remodeling"
             fill
             className="object-contain drop-shadow-2xl"

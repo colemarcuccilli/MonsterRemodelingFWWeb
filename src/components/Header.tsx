@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { gsap } from '@/lib/gsap'
+import { getAssetPath } from '@/lib/utils'
 import { Menu, X, Phone } from 'lucide-react'
 
 const navLinks = [
@@ -95,7 +96,7 @@ export default function Header() {
       {/* Super low opacity background image */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <Image
-          src="/assets/work1.webp"
+          src={getAssetPath('/assets/work1.webp')}
           alt=""
           fill
           className="object-cover opacity-[0.03]"
@@ -111,7 +112,7 @@ export default function Header() {
             <Link href="#home" className="flex items-center gap-3 group">
               <div className="relative">
                 <Image
-                  src="/assets/MonsterRemodelingLogo.webp"
+                  src={getAssetPath('/assets/MonsterRemodelingLogo.webp')}
                   alt="Monster Remodeling"
                   width={72}
                   height={72}
