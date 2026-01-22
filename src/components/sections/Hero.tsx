@@ -157,7 +157,7 @@ export default function Hero() {
       // Peeking logo slide-up animation
       if (peekingImageRef.current) {
         gsap.to(peekingImageRef.current, {
-          y: '10%',
+          y: 0,
           duration: 1.2,
           ease: 'power3.out',
           delay: 2,
