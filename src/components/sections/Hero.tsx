@@ -156,17 +156,12 @@ export default function Hero() {
 
       // Peeking image slide-up animation
       if (peekingImageRef.current) {
-        gsap.fromTo(
-          peekingImageRef.current,
-          { y: '100%', opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            ease: 'power3.out',
-            delay: 2,
-          }
-        )
+        gsap.to(peekingImageRef.current, {
+          y: 0,
+          duration: 1.2,
+          ease: 'power3.out',
+          delay: 2,
+        })
       }
 
     }, heroRef)
@@ -351,7 +346,7 @@ export default function Hero() {
       {/* Peeking Header Bottom Image */}
       <div
         ref={peekingImageRef}
-        className="absolute bottom-0 left-0 right-0 z-[60] pointer-events-none opacity-0"
+        className="absolute bottom-0 left-0 right-0 z-[60] pointer-events-none translate-y-full"
       >
         <div className="relative w-full h-32 sm:h-40 md:h-48 lg:h-56">
           <Image
