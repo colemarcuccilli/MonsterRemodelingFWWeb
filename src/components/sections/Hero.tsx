@@ -154,10 +154,10 @@ export default function Hero() {
         ease: 'sine.inOut',
       })
 
-      // Peeking image slide-up animation
+      // Peeking logo slide-up animation
       if (peekingImageRef.current) {
         gsap.to(peekingImageRef.current, {
-          y: 0,
+          y: '50%',
           duration: 1.2,
           ease: 'power3.out',
           delay: 2,
@@ -343,17 +343,17 @@ export default function Hero() {
         <ArrowDown size={24} className="text-monster-purple" />
       </div>
 
-      {/* Peeking Header Bottom Image */}
+      {/* Peeking Logo */}
       <div
         ref={peekingImageRef}
-        className="absolute bottom-0 left-0 right-0 z-[60] pointer-events-none translate-y-full"
+        className="absolute bottom-0 left-1/2 md:left-[15%] transform -translate-x-1/2 md:translate-x-0 translate-y-full z-[60] pointer-events-none"
       >
-        <div className="relative w-full h-32 sm:h-40 md:h-48 lg:h-56">
+        <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
           <Image
             src={getAssetPath('/assets/headerbottomimage.png')}
             alt="Monster Remodeling"
             fill
-            className="object-cover object-top"
+            className="object-contain drop-shadow-2xl"
           />
         </div>
       </div>
