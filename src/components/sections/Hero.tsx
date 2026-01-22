@@ -373,7 +373,7 @@ export default function Hero() {
       {/* Peeking Logo */}
       <div
         ref={peekingImageRef}
-        className="absolute bottom-0 inset-x-0 md:inset-x-auto md:left-[15%] flex justify-center md:justify-start translate-y-full z-[60] pointer-events-none"
+        className="absolute bottom-0 left-1/2 md:left-[15%] -translate-x-1/2 md:translate-x-0 translate-y-full z-[60] pointer-events-none"
       >
         <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
           <Image
