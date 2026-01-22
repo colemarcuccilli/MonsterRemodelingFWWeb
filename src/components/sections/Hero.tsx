@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { gsap } from '@/lib/gsap'
 import { getAssetPath } from '@/lib/utils'
-import { Hammer, Paintbrush, Home, Wrench, Ruler, HardHat, PaintBucket, Drill } from 'lucide-react'
+import { ArrowDown, Hammer, Paintbrush, Home, Wrench, Ruler, HardHat, PaintBucket, Drill } from 'lucide-react'
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null)
