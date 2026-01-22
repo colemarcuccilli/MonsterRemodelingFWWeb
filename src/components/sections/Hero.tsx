@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { gsap } from '@/lib/gsap'
 import { getAssetPath } from '@/lib/utils'
-import { ArrowDown, Hammer, Paintbrush, Home, Wrench, Ruler, HardHat, PaintBucket, Drill } from 'lucide-react'
+import { Hammer, Paintbrush, Home, Wrench, Ruler, HardHat, PaintBucket, Drill } from 'lucide-react'
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null)
@@ -17,6 +17,8 @@ export default function Hero() {
   const ctaRef = useRef<HTMLDivElement>(null)
   const floatingIconsRef = useRef<HTMLDivElement>(null)
   const peekingImageRef = useRef<HTMLDivElement>(null)
+  const pupilRef = useRef<HTMLDivElement>(null)
+  const eyeOriginRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -145,19 +147,10 @@ export default function Hero() {
         ease: 'linear',
       })
 
-      // Scroll indicator animation
-      gsap.to('.scroll-indicator', {
-        y: 10,
-        duration: 1.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      })
-
       // Peeking logo slide-up animation
       if (peekingImageRef.current) {
         gsap.to(peekingImageRef.current, {
-          y: 0,
+          y: '30%',
           duration: 1.2,
           ease: 'power3.out',
           delay: 2,
@@ -167,6 +160,46 @@ export default function Hero() {
     }, heroRef)
 
     return () => ctx.revert()
+  }, [])
+
+  // Eye pupil mouse tracking
+  useEffect(() => {
+    const getMaxDistance = () => {
+      // Scale max distance based on screen width to match logo size
+      const width = window.innerWidth
+      if (width >= 1024) return 15 // lg
+      if (width >= 768) return 12  // md
+      if (width >= 640) return 10  // sm
+      return 8 // mobile
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!pupilRef.current || !peekingImageRef.current) return
+
+      const maxDistance = getMaxDistance()
+
+      // Get the center of the eye area (where pupil should originate)
+      const logoRect = peekingImageRef.current.getBoundingClientRect()
+      const eyeCenterX = logoRect.left + logoRect.width / 2
+      const eyeCenterY = logoRect.top + logoRect.height * 0.4 // Adjust vertical position
+
+      // Calculate angle and distance from eye center to mouse
+      const deltaX = e.clientX - eyeCenterX
+      const deltaY = e.clientY - eyeCenterY
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+      const angle = Math.atan2(deltaY, deltaX)
+
+      // Constrain movement to maxDistance
+      const constrainedDistance = Math.min(distance, maxDistance)
+      const moveX = Math.cos(angle) * constrainedDistance
+      const moveY = Math.sin(angle) * constrainedDistance
+
+      // Apply transform to pupil
+      pupilRef.current.style.transform = `translate(${moveX}px, ${moveY}px)`
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
   // Split text into characters for animation
@@ -337,16 +370,10 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 text-monster-gray z-20">
-        <span className="text-sm">Scroll to explore</span>
-        <ArrowDown size={24} className="text-monster-purple" />
-      </div>
-
       {/* Peeking Logo */}
       <div
         ref={peekingImageRef}
-        className="absolute bottom-0 left-1/2 md:left-[15%] transform -translate-x-1/2 md:translate-x-0 translate-y-full z-[60] pointer-events-none"
+        className="absolute bottom-0 inset-x-0 md:inset-x-auto md:left-[15%] flex justify-center md:justify-start translate-y-full z-[60] pointer-events-none"
       >
         <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
           <Image
@@ -355,6 +382,15 @@ export default function Hero() {
             fill
             className="object-contain drop-shadow-2xl"
           />
+          {/* Eye pupil that follows mouse */}
+          <div
+            ref={pupilRef}
+            className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 ease-out"
+          >
+            <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8" viewBox="0 0 32 32">
+              <circle cx="16" cy="16" r="13" fill="white" />
+            </svg>
+          </div>
         </div>
       </div>
     </section>
