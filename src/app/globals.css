@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --monster-purple: #663e80;
+  --monster-deep: #4a1179;
+  --monster-medium: #6c4685;
+  --monster-light: #d1b5e2;
+  --monster-soft: #c4a6d7;
+  --monster-pale: #f5f0f8;
+  --monster-white: #ffffff;
+  --monster-dark: #1f1f1f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--monster-white);
+  color: var(--monster-dark);
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--monster-purple);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--monster-deep);
+}
+
+/* Text selection */
+::selection {
+  background-color: var(--monster-light);
+  color: var(--monster-dark);
+}
+
+/* Smooth section transitions */
+section {
+  position: relative;
+}
+
+/* Glass morphism effect utility */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(102, 62, 128, 0.1);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #663e80 0%, #4a1179 50%, #6c4685 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
